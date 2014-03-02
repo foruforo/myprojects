@@ -8,21 +8,6 @@
 </head>
 <body>
 	<h1>Index File</h1><br />
-	<form action="spring-test-db/saveuser" method="post">
-	<table>
-		<tr>
-			<td>Name : </td>
-			<td><input type="text" name="name"/></td>
-		</tr>
-		<tr>
-			<td>Age : </td>
-			<td><input type="text" name="age"/></td>
-		</tr>
-		<tr>
-			<td></td>
-			<td><input type="submit" value="Submit"/></td>
-		</tr>
-	</table>
-	</form>
+	<a href="helloworld">Click here to fire the controller and check the output at server console</a>
 </body>
 </html>
