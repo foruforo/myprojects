@@ -24,5 +24,7 @@
 		</tr>
 	</table>
 	</form>
+	<br />
+	<a href="getallusers">Click here to get all users, and check the output on server console</a>
 </body>
 </html>
