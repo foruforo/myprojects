@@ -76,7 +76,7 @@
 			</plugin>
 
 			<!-- Create Wsdl TO Java JAX-WS Client Generator -->
-			<!-- <plugin>
+			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>jaxws-maven-plugin</artifactId>
 				<executions>
@@ -86,7 +86,7 @@
 							<goal>wsimport</goal>
 						</goals>
 						<configuration>
-							<wsdlLocation>http://insonix-cxf.sunnydyal.cloudbees.net/services/person?wsdl</wsdlLocation>
+							<wsdlLocation>${wsdl-location}</wsdlLocation>
 							<wsdlDirectory>src/main/resources</wsdlDirectory>
 							<wsdlFiles>
 								<wsdlFile>wsdlTest.wsdl</wsdlFile>
@@ -99,7 +99,7 @@
 						</configuration>
 					</execution>
 				</executions>
-			</plugin> -->
+			</plugin>
 		</plugins>
 	</build>
 </project>
