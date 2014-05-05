@@ -1,0 +1,46 @@
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://impl.cxf.insonix.com/"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns2="http://schemas.xmlsoap.org/soap/http"
+	xmlns:ns1="http://cxf.insonix.com/" name="PersonService"
+	targetNamespace="http://impl.cxf.insonix.com/">
+	<wsdl:import
+		location="http://insonix-cxf.sunnydyal.cloudbees.net/services/person?wsdl=PersonService.wsdl"
+		namespace="http://cxf.insonix.com/"></wsdl:import>
+	<wsdl:binding name="PersonServiceSoapBinding" type="ns1:PersonService">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="addPerson">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="addPerson">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="addPersonResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getAll">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="getAll">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="getAllResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getPerson">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="getPerson">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="getPersonResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="PersonService">
+		<wsdl:port binding="tns:PersonServiceSoapBinding" name="PersonServiceImplPort">
+			<soap:address
+				location="${wsdl-location}" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>
