@@ -1,0 +1,18 @@
+##  for local
+jdbc.driverClassName=com.mysql.jdbc.Driver
+jdbc.url=jdbc:mysql://192.168.0.240:3306/nit-empirecl
+jdbc.username=java
+jdbc.password=JavA_123#
+jdbc.dialect=org.hibernate.dialect.MySQLDialect
+
+
+#jdbc.driverClassName=com.mysql.jdbc.Driver
+#jdbc.url=jdbc:mysql://192.168.0.240:3306/test1
+#jdbc.username=java
+#jdbc.password=JavA_123#
+
+
+#jdbc.driverClassName=com.mysql.jdbc.Driver
+#jdbc.url=jdbc:mysql://192.168.0.240:3306/data_scrapping
+#jdbc.username=java
+#jdbc.password=JavA_123#

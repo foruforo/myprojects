@@ -1,0 +1,16 @@
+package com.netsol.service;
+
+import org.springframework.stereotype.Service;
+
+import com.netsol.entities.User;
+
+
+
+
+@Service
+public interface UserService {
+
+	public User findUserByName(String username);
+	public Long saveUser(User user);
+	public void updateUser(User user);
+}

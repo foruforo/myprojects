@@ -1,0 +1,29 @@
+/**
+ * 
+ */
+package com.netsol.controllers.model;
+
+import java.util.List;
+
+/**
+ * @author Harmeet Singh(Taara)
+ *
+ */
+public class ValidateResponse {
+
+	private String status;
+	private List<ErrorMessage> errorMessages;
+	
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	public List<ErrorMessage> getErrorMessages() {
+		return errorMessages;
+	}
+	public void setErrorMessages(List<ErrorMessage> errorMessages) {
+		this.errorMessages = errorMessages;
+	}
+}

@@ -1,0 +1,47 @@
+package com.netsol.service.impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.netsol.dao.UserDao;
+import com.netsol.entities.User;
+import com.netsol.service.UserService;
+
+
+
+@Service
+public class UserServiceImpl  implements UserService{
+	
+	@Autowired
+	private UserDao userDao;
+	
+	@Override
+	public User findUserByName(String username) {
+		List<User> users=userDao.findByProperty("username", username);	
+		if(users != null){
+			if(!users.isEmpty()){
+				return users.get(0);
+			}
+		}
+		return null;
+	}
+	
+	@Override
+	public void updateUser(User user) {
+		userDao.saveOrUpdate(user);
+	}
+
+	@Override
+	public Long saveUser(User user) {
+		return userDao.save(user);
+	}
+	
+	/*-------------------------------------------------------------------
+	 * Following Methods are used for Web service 
+	 */
+	/*public User getUserFromWebService() {
+		return restUtil.<User>doExchange("", User.class);
+	}*/
+}

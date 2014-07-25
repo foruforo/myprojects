@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd ">
+
+	<!-- for Spring security -->
+	<!-- <import resource="classpath:security-config/spring-security.xml" /> -->
+
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/changeLocale" />
+			<bean id="localeChangeInterceptor"
+				class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor"
+				scope="singleton">
+				<property name="paramName" value="lang" />
+			</bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
+
+	<!-- <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"> 
+		<property name="maxUploadSize" value="52428800" /> <property name="maxInMemorySize"> 
+		<value>10000</value> </property> </bean> -->
+
+	<!-- Configures the annotation-driven Spring MVC Controller programming 
+		model. Note that, with Spring 3.0, this tag works in Servlet MVC only! -->
+	<!-- <mvc:annotation-driven validator="validator" /> -->
+	<!-- <mvc:resources mapping="/assets/**" location="/assets/" /> -->
+</beans>

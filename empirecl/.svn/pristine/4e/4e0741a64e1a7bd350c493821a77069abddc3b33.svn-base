@@ -1,0 +1,9 @@
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<script type="text/javascript">
+    /* $(document).ready(function () {
+    	
+    }); */
+</script>
+<h1>Sign Up successfully and email send to your account. Please Login <a href="<spring:url value="/"/>">click here</a></h1>

@@ -1,0 +1,162 @@
+package com.netsol.dao.impl;
+
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+import java.util.List;
+
+import org.hibernate.Criteria;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.support.DataAccessUtils;
+import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.netsol.dao.GenericDao;
+
+
+@Transactional
+public abstract class GenericDaoImpl<T> extends HibernateDaoSupport implements GenericDao<T> {
+
+	@Autowired
+	private SessionFactory sessionFactory;
+	private Class<T> type;
+	
+	@Autowired	
+	public void init(SessionFactory sessionFactory) {
+		setSessionFactory(sessionFactory);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public GenericDaoImpl() {
+		
+		Type t = getClass().getGenericSuperclass();
+		ParameterizedType pt = (ParameterizedType) t;
+		type = (Class<T>) pt.getActualTypeArguments()[0];
+	}
+	
+	protected Class<T> getType() {
+		return this.type;
+	}
+
+	protected String getClassName() {
+		return type.getName();
+	}
+
+	@Override
+	public Long save(T t) {
+		return (Long) getHibernateTemplate().save(t);
+	}
+ 
+	@Override
+	public void saveAll(List<T> t) {
+		getHibernateTemplate().saveOrUpdate(t);
+	}
+
+	@Override
+	public void delete(Long id) {
+		getHibernateTemplate().delete(get(id));
+	}
+
+	@Override
+	public void saveOrUpdate(T t) {
+		getHibernateTemplate().saveOrUpdate(t);
+	}
+
+	@Override
+	public T get(Long id) {
+		return (T) getHibernateTemplate().get(type, id);
+	}
+
+	@Override
+	public T load(Long id) {
+		return (T) getHibernateTemplate().load(type, id);
+	}
+
+	@Override
+	public List<T> findByProperty(String property, Object value) {
+		
+				
+		Query query = getHibernateTemplate().getSessionFactory().openSession().createQuery(
+			     " from "+type.getName()+" as model  where model."+property+"= :value");
+		query.setParameter("value", value);
+		query.setCacheable(true);
+		//query.setCacheRegion("query.StreetTypes");
+		return query.list();
+		/*return getHibernateTemplate().find(
+				"from " + type.getName() + " as model where model." + property
+						+ "='" + value + "'");*/
+	}
+
+	@Override
+	public List<T> findByExample(T t) {
+		return (List<T>) getHibernateTemplate().findByExample(t);
+	}
+
+	@Override
+	public List<T> findAll() {
+		return (List<T>) getHibernateTemplate().find("FROM CinDetails");
+	}
+
+	@Override
+	public Integer countAll() {
+		return DataAccessUtils.intResult(getHibernateTemplate().find(
+				"select count(*) from " + type.getName()));
+	}
+
+	@Override
+	public void merge(T t) {
+		try {
+			Transaction tx = null;
+			tx = getHibernateTemplate().getSessionFactory().getCurrentSession()
+					.beginTransaction();
+			getHibernateTemplate().merge(t);
+			tx.commit();
+		} catch (RuntimeException re) {
+			throw re;
+		}
+	}
+
+	@Override
+	public List<T> findDataByLimit(Integer startIndex, Integer maxLimit) {
+		List<T> result = null;
+		try {
+			Session session = getHibernateTemplate().getSessionFactory()
+					.openSession();
+			Criteria criteria = session.createCriteria(type);
+			criteria.setMaxResults(maxLimit);
+			criteria.setFirstResult(startIndex);
+			result = criteria.list();
+			session.close();
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return result;
+	}
+
+	@Override
+	public boolean batchSave(List<T> list) {
+		try {
+			Session session = getHibernateTemplate().getSessionFactory()
+					.openSession();
+			Transaction tx = session.beginTransaction();
+			int i = 1;
+			for (T t : list) {
+				saveOrUpdate(t);
+				if (i % 20 == 0) {
+					session.flush();
+					session.clear();
+				}
+				i++;
+			}
+			tx.commit();
+			session.close();
+		} catch (Exception e) {
+			System.out.println(e);
+			return false;
+		}
+		return true;
+	}
+}

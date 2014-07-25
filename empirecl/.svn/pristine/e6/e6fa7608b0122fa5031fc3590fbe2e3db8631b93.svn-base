@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd 
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- Activates various annotations to be detected in bean classes -->
+	<context:annotation-config />
+	<aop:aspectj-autoproxy />
+
+	<bean id="auditAspect" class="com.netsol.aspect.ServiceAuditAspect" />
+
+
+	<!-- for database configuration -->
+	<import resource="classpath:config/db-configuration.xml" />
+
+	<!-- for Spring security -->
+	<import resource="classpath:config/spring-security.xml" />
+	
+	<import resource="tiles-context.xml" />
+
+	<!-- Scans the classpath for annotated components that will be auto-registered 
+		as Spring beans. For example @Controller and @Service. Make sure to set the 
+		correct base-package -->
+	<context:component-scan base-package="com.app" />
+
+	<!-- Configures the annotation-driven Spring MVC Controller programming 
+		model. Note that, with Spring 3.0, this tag works in Servlet MVC only! -->
+	<mvc:annotation-driven />
+
+	<bean id="restTemplate" class="org.springframework.web.client.RestTemplate">
+		<property name="messageConverters">
+			<list>
+				<bean
+					class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter" />
+				<bean class="org.springframework.http.converter.FormHttpMessageConverter" />
+				<bean
+					class="org.springframework.http.converter.xml.SourceHttpMessageConverter" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="javaMailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com" />
+		<property name="port" value="25" />
+		<property name="protocol" value="smtp" />
+		<property name="username">
+			<value>nsitestlink@gmail.com</value>
+		</property>
+		<property name="password">
+			<value>1q2w3e4r$</value>
+		</property>
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.debug">false</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+			</props>
+		</property>
+	</bean>
+</beans>

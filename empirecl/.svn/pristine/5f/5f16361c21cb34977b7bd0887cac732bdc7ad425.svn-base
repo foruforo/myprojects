@@ -1,0 +1,45 @@
+package com.netsol.controllers.utility;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.security.core.Authentication;
+import org.springframework.security.web.DefaultRedirectStrategy;
+import org.springframework.security.web.RedirectStrategy;
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler; 
+
+public class CustomLogoutSuccessHandler
+        implements LogoutSuccessHandler {
+      
+        private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
+        public String userLogout;
+        public String adminLogout;
+        
+       
+
+		public void setUserLogout(String userLogout) {
+			this.userLogout = userLogout;
+		}
+
+		public void setAdminLogout(String adminLogout) {
+			this.adminLogout = adminLogout;
+		}
+
+		public void onLogoutSuccess(HttpServletRequest request,
+				HttpServletResponse response, Authentication authentication)
+				throws IOException, ServletException {
+			// TODO Auto-generated method stub
+			String loginUrl = this.userLogout;
+			/*if(authentication != null)
+			{
+	           Collection<GrantedAuthority> listOfRoles = authentication.getAuthorities();
+	           loginUrl = (listOfRoles.toString().contains("ROLE_ADMIN"))?this.adminLogout:this.userLogout;
+			}*/
+	            redirectStrategy.sendRedirect( request, response, loginUrl );
+			
+		}
+
+    }

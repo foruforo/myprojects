@@ -1,0 +1,45 @@
+package com.netsol.controllers.utility;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.web.DefaultRedirectStrategy;
+import org.springframework.security.web.RedirectStrategy;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+
+
+public class CustomAuthenticationSuccessHandler implements AuthenticationSuccessHandler    {
+	 private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
+     public String userLogin;
+     public String adminLogin;
+
+    public void setUserLogin(String userLogin) {
+		this.userLogin = userLogin;
+	}
+
+	public void setAdminLogin(String adminLogin) {
+		this.adminLogin = adminLogin;
+	}
+	
+	public void onAuthenticationSuccess(HttpServletRequest request,
+			HttpServletResponse response, Authentication auth) throws IOException,
+			ServletException {
+		
+		/*String loginUrl ="";
+        Collection<GrantedAuthority> listOfRoles = auth.getAuthorities();
+		loginUrl = listOfRoles.toString().contains("ROLE_ADMIN") ? this.adminLogin : this.userLogin;*/
+		String loginUrl ="";	
+ 		if(request.getParameter("utype").equals("user")){
+ 			loginUrl =this.userLogin;
+ 		}else{
+ 			loginUrl =this.adminLogin;
+ 		}
+ 		loginUrl=loginUrl+"?login=on";
+		redirectStrategy.sendRedirect( request, response, loginUrl );
+	}
+ 
+
+}

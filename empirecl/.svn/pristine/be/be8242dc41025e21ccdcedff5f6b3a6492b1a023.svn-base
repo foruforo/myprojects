@@ -1,0 +1,14 @@
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<section class="full minHgt70">
+	<div class="createValidateForm">
+		<h1 style="margin: 160px 0 0;">Oops! Something went wrong. Please
+			contact support on ...</h1>
+	</div>
+</section>
+
+<!--
+    Failed URL: ${url}
+    Exception:  ${exception.message}
+        <c:forEach items="${exception.stackTrace}" var="ste">    ${ste} 
+    </c:forEach>
+    -->

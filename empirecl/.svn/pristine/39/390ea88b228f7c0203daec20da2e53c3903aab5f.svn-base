@@ -1,0 +1,9 @@
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<script type="text/javascript">
+    /* $(document).ready(function () {
+    	
+    }); */
+</script>
+<h1>Password send send to your email account.</h1>

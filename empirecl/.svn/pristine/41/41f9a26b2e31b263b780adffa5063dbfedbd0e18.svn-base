@@ -1,0 +1,76 @@
+/**
+ * 
+ */
+package com.netsol.api;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
+import org.apache.log4j.Logger;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.netsol.entities.User;
+
+/**
+ * @author Harmeet Singh(Taara)
+ *
+ */
+
+@Controller
+@RequestMapping(value = "/api")
+public class UserApi {
+
+	Logger logger = Logger.getLogger(UserApi.class);
+
+	List<User> users = new ArrayList<User>();
+
+	public UserApi() {
+		User user = new User();
+		user.setId(13);
+		user.setFirstName("Harmeet");
+		user.setLastName("Singh");
+		user.setUsername("harmeet.singh@netsolutionsindia.com");
+		user.setPassword("password");
+		user.setEnabled("1");
+
+		users.add(user);
+	}
+
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	public User login(@RequestParam(value="userName", defaultValue="") String userName,
+			@RequestParam(value="password", defaultValue="") String password) {
+		logger.info("In User Login Service...... ");
+
+		if (!userName.isEmpty() && !password.isEmpty()) {
+			User user = users.get(0);
+			if (userName.equalsIgnoreCase(user.getUsername())
+					&& password.equals(user.getPassword())) {
+				String key = UUID.randomUUID() + ""
+						+ System.currentTimeMillis();
+				user.setKey(key);
+				users.add(0, user);
+				return user;
+			}
+		}
+		return null;
+	}
+
+	@RequestMapping(value = "/logout", method = RequestMethod.POST)
+	public User logout(@RequestParam(value="key", defaultValue="") String key) {
+		logger.info("In User Logout Service...... ");
+
+		if (!key.isEmpty()) {
+			User user = users.get(0);
+			if (key.equals(user.getKey())) {
+				user.setKey("");
+				users.add(0, user);
+				return user;
+			}
+		}
+		return null;
+	}
+}

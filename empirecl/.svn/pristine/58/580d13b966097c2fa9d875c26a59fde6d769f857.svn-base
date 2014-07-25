@@ -1,0 +1,58 @@
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib prefix="ajax" tagdir="/WEB-INF/tags"%>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#signupForm').find('.help-inline').hide();
+	});
+</script>
+<div class="overlay"></div>
+<section class="container">
+	<div class="login">
+		<h1>Sign Up</h1>
+		<c:if test="${not empty message}">
+			<label>${message}</label>
+		</c:if>
+
+		<form:form action="signupSubmit" id="signupForm" modelAttribute="user">
+
+			<div class="control-group" id="firstName">
+			<label><spring:message code="lable.firstname" /><span
+				style="color: #ff0000;">*</span></label>
+			<form:input path="firstName" />
+			<span class="help-inline"><form:errors path="firstName" /></span>
+			</div>
+			
+			<div class="control-group" id="lastName">
+			<label><spring:message code="lable.lastname" /><span
+				style="color: #ff0000;">*</span></label>
+			<form:input path="lastName" />
+			<span class="help-inline"><form:errors path="lastName" /></span>
+			</div>
+			
+			<div class="control-group" id="username">
+				<label><spring:message code="lable.email" /><span
+					style="color: #ff0000;">*</span></label>
+				<form:input path="username" />
+				<span class="help-inline"><form:errors path="username" /></span>
+			</div>
+
+			<div class="control-group" id="password">
+				<label><spring:message code="lable.password" /><span
+					style="color: #ff0000;">*</span></label>
+				<form:password path="password" />
+				<span class="help-inline"><form:errors path="password" /></span>
+			</div>
+
+			<label><spring:message code="lable.confirm_password" /><span
+				style="color: #ff0000;">*</span></label>
+			<input type="password" name="confirmpassword">
+			<input type="submit" />
+		</form:form>
+
+		<ajax:formPartialRefreshTag validateUrl="/validateUser.json"
+			formId="signupForm" />
+	</div>
+</section>

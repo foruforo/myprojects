@@ -1,0 +1,42 @@
+/*
+ * this controller is used for handle 
+ * a request for Public user 
+ */
+
+package com.netsol.controllers;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.netsol.entities.User;
+import com.netsol.service.UserService;
+
+
+@Controller
+@RequestMapping("/admin")
+public class AdminController {
+
+	@Autowired
+	private UserService userService;
+
+	static final Logger logger = Logger.getLogger(AdminController.class);
+	
+	@RequestMapping("/home")
+	public String getlogin(HttpServletRequest request,HttpSession session, Authentication auth, Model model) {
+		logger.debug("calling admin page...");
+		User user=null;
+		if(request.getParameter("login")!= null){
+			user=userService.findUserByName(auth.getName());
+			session.setAttribute("user", user);
+		}
+		model.addAttribute("title", "Admin Home");
+		return "admin-home";
+	}
+}

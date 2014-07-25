@@ -1,0 +1,14 @@
+/**
+ * 
+ */
+package com.netsol.service;
+
+import com.netsol.entities.UserRole;
+
+/**
+ * @author Harmeet Singh(Taara)
+ *
+ */
+public interface UserRoleService{
+	public UserRole getUserDefaultRole() ;
+}

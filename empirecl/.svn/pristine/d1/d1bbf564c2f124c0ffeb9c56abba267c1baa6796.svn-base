@@ -1,0 +1,36 @@
+package com.netsol.controllers.utility;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.log4j.Logger;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices;
+
+ 
+
+public class PersistentTokenBaseRememberMeService extends PersistentTokenBasedRememberMeServices   {
+ 
+	String parameter;
+	protected static Logger logger = Logger.getLogger("authentication");
+	public void setParameter(String parameter) {
+		this.parameter = parameter;
+	}
+	public PersistentTokenBaseRememberMeService() throws Exception {
+		super();
+		
+	}
+	@Override
+    public void onLoginSuccess(HttpServletRequest request, HttpServletResponse response, Authentication successfulAuthentication) {
+		logger.debug("Logged IN");
+		super.onLoginSuccess(request, response, successfulAuthentication);
+		try {
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    }
+	 
+	 
+ 
+
+}

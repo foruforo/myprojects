@@ -1,0 +1,59 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.netsol</groupId>
+		<artifactId>empirecl</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<artifactId>empirecl-pojo</artifactId>
+	<name>empirecl-pojo</name>
+
+	<properties>
+		<org.hibernate.jpa.version>1.0.0.Final</org.hibernate.jpa.version>
+		<org.hibernate>4.3.5.Final</org.hibernate>
+		<org.hibernate.validator>5.1.1.Final</org.hibernate.validator>
+	</properties>
+	<dependencies>
+		<!-- Start Hibernate Dependencies -->
+		<dependency>
+			<groupId>org.hibernate.javax.persistence</groupId>
+			<artifactId>hibernate-jpa-2.1-api</artifactId>
+			<version>${org.hibernate.jpa.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-ehcache</artifactId>
+			<version>${org.hibernate}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>${org.hibernate.validator}</version>
+		</dependency>
+		<!-- END OF Hibernate Dependencies -->
+		
+		<!-- Start Spring Security Dependencies -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-core</artifactId>
+		</dependency>
+		<!-- END Of Security Dependencies -->
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<finalName>empire-pojo</finalName>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>

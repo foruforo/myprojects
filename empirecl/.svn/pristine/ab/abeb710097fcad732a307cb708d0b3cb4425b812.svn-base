@@ -1,0 +1,7 @@
+package com.netsol.controllers.utility;
+
+import org.springframework.security.web.authentication.rememberme.InMemoryTokenRepositoryImpl;
+
+public class PersistentTokenRepositoryImpl extends InMemoryTokenRepositoryImpl{
+/**/
+}

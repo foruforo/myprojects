@@ -1,0 +1,28 @@
+/**
+ * 
+ */
+package com.netsol.service.impl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.netsol.dao.UserRoleDao;
+import com.netsol.entities.UserRole;
+import com.netsol.service.UserRoleService;
+
+/**
+ * @author Harmeet Singh(Taara)
+ *
+ */
+@Service
+public class UserRoleServiceImpl implements UserRoleService{
+
+	@Autowired
+	private UserRoleDao userRoleDao;
+	
+	@Override
+	public UserRole getUserDefaultRole() {
+		return userRoleDao.findByProperty("roleName", "ROLE_USER").get(0);
+	}
+
+}

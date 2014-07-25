@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC 
+	"-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" 
+	"http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+
+	<!-- We declare a new template named template-main. This template is used 
+		for displaying the main page. It has 4 attributes. These attributes are placeholder 
+		for our contents For each attribute, we have assigned a corresponding JSP -->
+	<definition name="template-public" template="/WEB-INF/views/common/public.jsp">
+		<put-attribute name="header-content" value="" />
+		<put-attribute name="primary-content" value="" />
+		<put-attribute name="footer-content" value="" />
+		<put-attribute name="title" value="key.title.default" />
+	</definition>
+
+	<!-- START Public Titles Defintion -->
+	<definition name="public-index" template="/WEB-INF/views/common/public.jsp">
+		<put-attribute name="header-content" value="/WEB-INF/views/common/header.jsp" />
+		<put-attribute name="left-panel-content"
+			value="/WEB-INF/views/common/leftPanel.jsp" />
+		<put-attribute name="primary-content" value="/WEB-INF/views/common/index.jsp" />
+		<put-attribute name="footer-content" value="/WEB-INF/views/common/footer.jsp" />
+		<put-attribute name="title" value="key.title.default" />
+	</definition>
+
+	<definition name="admin-login" template="/WEB-INF/views/common/public.jsp">
+		<put-attribute name="header-content"
+			value="/WEB-INF/views/common/adminHeaderBeforeLogin.jsp" />
+		<put-attribute name="left-panel-content" value="" />
+		<put-attribute name="primary-content"
+			value="/WEB-INF/views/common/adminLogin.jsp" />
+		<put-attribute name="footer-content"
+			value="/WEB-INF/views/common/adminFooterBeforeLogin.jsp" />
+	</definition>
+
+	<definition name="public-403" extends="public-index">
+		<put-attribute name="primary-content" value="/WEB-INF/views/common/403.jsp" />
+	</definition>
+
+	<definition name="public-exception" extends="public-index">
+		<put-attribute name="primary-content"
+			value="/WEB-INF/views/exception/exception.jsp" />
+	</definition>
+
+	<!-- END Of Public Titles Defintion -->
+
+	<!-- Start USER Tilies Definition -->
+	<definition name="user-login" extends="public-index">
+		<put-attribute name="primary-content" value="/WEB-INF/views/common/userLogin.jsp" />
+		<put-attribute name="title" value="key.title.user.login" />
+	</definition>
+
+	<definition name="user-signup" extends="public-index">
+		<put-attribute name="primary-content" value="/WEB-INF/views/common/signup.jsp" />
+		<put-attribute name="title" value="key.title.user.signup" />
+	</definition>
+
+	<definition name="user-signUpConformation" extends="public-index">
+		<put-attribute name="primary-content"
+			value="/WEB-INF/views/common/signUpConformation.jsp" />
+	</definition>
+
+	<definition name="user-forgotPassword" extends="public-index">
+		<put-attribute name="primary-content"
+			value="/WEB-INF/views/common/forgotPassword.jsp" />
+	</definition>
+
+	<definition name="user-sendPassword" extends="public-index">
+		<put-attribute name="primary-content"
+			value="/WEB-INF/views/common/sendPassword.jsp" />
+	</definition>
+
+	<definition name="user-changePassword" extends="public-index">
+		<put-attribute name="primary-content"
+			value="/WEB-INF/views/common/changePassword.jsp" />
+	</definition>
+
+	<definition name="user-home" template="/WEB-INF/views/common/public.jsp">
+		<put-attribute name="header-content" value="/WEB-INF/views/user/userHeader.jsp" />
+		<put-attribute name="left-panel-content"
+			value="/WEB-INF/views/common/leftPanel.jsp" />
+		<put-attribute name="primary-content" value="/WEB-INF/views/user/userHome.jsp" />
+		<put-attribute name="footer-content" value="/WEB-INF/views/user/userFooter.jsp" />
+		<put-attribute name="title" value="key.title.default" />
+	</definition>
+	<!-- END Of USER Tilies Definition -->
+
+	<!-- Start Admin Tilies Definition -->
+	<definition name="admin-home" template="/WEB-INF/views/common/public.jsp">
+		<put-attribute name="header-content"
+			value="/WEB-INF/views/admin/adminHeader.jsp" />
+		<put-attribute name="left-panel-content"
+			value="/WEB-INF/views/admin/admin-leftPanel.jsp" />
+		<put-attribute name="primary-content" value="/WEB-INF/views/admin/adminHome.jsp" />
+		<put-attribute name="footer-content"
+			value="/WEB-INF/views/admin/adminFooter.jsp" />
+	</definition>
+	<!-- END Of Admin Tilies Definition -->
+
+</tiles-definitions>
