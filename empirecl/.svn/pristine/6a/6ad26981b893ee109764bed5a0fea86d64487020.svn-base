@@ -1,5 +1,0 @@
-package com.netsol.dao;
-
-import com.netsol.entities.User;
-
-public interface UserDao extends GenericDao<User>  {}
