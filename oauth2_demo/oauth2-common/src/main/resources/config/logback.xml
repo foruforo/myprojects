@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>%d{HH:mm:ss} %5level [%file:%line] - %msg%n</Pattern>
+		</encoder>
+	</appender>
+
+	<logger name="com.netsol">
+		<level value="all" />
+	</logger>
+	<root level="error">
+		<appender-ref ref="STDOUT" />
+	</root>
+</log4j:configuration>

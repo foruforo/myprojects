@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+		"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="hibernate.show_sql">true</property>
+        <property name="hibernate.format_sql">true</property>
+        
+        <property name="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</property>
+        <!-- <property name="hibernate.cache.region.factory_class">net.sf.ehcache.hibernate.SingletonEhCacheRegionFactory</property> -->
+        <property name="hibernate.cache.use_second_level_cache">true</property>
+        <property name="hibernate.cache.use_query_cache">true</property>
+        <property name="hibernate.cache.provider_configuration_file_resource_path">../ehcache.xml</property>
+        <property name="hbm2ddl.auto">update</property>
+        
+		<!-- <property name="hibernate.generate_statistics">true</property>
+		<property name="hibernate.cache.use_structured_entries">true</property> -->
+		
+      <!-- <property name="hibernate.c3p0.min_size">5</property>
+	  <property name="hibernate.c3p0.max_size">20</property>
+	  <property name="hibernate.c3p0.timeout">300</property>
+	  <property name="hibernate.c3p0.max_statements">50</property>
+	  <property name="hibernate.c3p0.idle_test_period">3000</property> -->
+        				
+        
+        
+      
+    </session-factory>
+</hibernate-configuration>             
